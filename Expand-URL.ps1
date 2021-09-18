@@ -22,6 +22,7 @@ Function Expand-URI {
     )
 
     BEGIN {
+        echo "$env:TEMP\ExpandURI.log"
         $LOG = "$env:TEMP\ExpandURI.log"
         Remove-Item $LOG –erroraction silentlyCONTINUE
     }
