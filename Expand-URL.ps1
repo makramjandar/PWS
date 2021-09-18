@@ -18,11 +18,11 @@ Function Expand-URI {
     Param(
 
         [Parameter(Mandatory = $True, ValueFromPipeline = $True, ValueFromPipelinebyPropertyName = $True)]
-        [string[]]$SHORT_URIS,
-        [string]$LOG = "$env:TEMP\ExpandURI.log"
+        [string[]]$SHORT_URIS
     )
 
     BEGIN {
+        $LOG = "$env:TEMP\ExpandURI.log"
         Remove-Item $LOG –erroraction silentlyCONTINUE
     }
     PROCESS {
