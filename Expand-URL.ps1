@@ -1,27 +1,14 @@
-function Expand-Uri {
-    [CmdletBinding()]
-    
-    param (
-        [Parameter(Mandatory,
-                   ValueFromPipeline,
-                   ValueFromPipelineByPropertyName)]
-        [Alias('URL')]
-        [uri[]] $Uri
-    )
-
+function Expand-Uri($Uri)
+{
     begin {
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     }
-
     process {
-            return (Invoke-WebRequest -Uri $Uri -UseBasicParsing).BaseResponse.ResponseUri.AbsoluteUri
-        }
+        try {return (Invoke-WebRequest -Uri $Uri -UseBasicParsing).BaseResponse.ResponseUri.AbsoluteUri}}
+        catch {"Ran into an issue: $PSItem"}
     }
 }
 
-# Expand-Uri 'https://t.co/rHrCyVMNA3'
-
-'buff.ly/2sWvPOH', 'zpr.io/6FPjh' | Expand-Uri
-
-
-iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JuAw5'))
+# Expand-Uri https://t.co/rHrCyVMNA3
+# buff.ly/2sWvPOH | Expand-Uri
+# iex ((New-Object System.Net.WebClient).DownloadString('git.io/JzqqY'))
