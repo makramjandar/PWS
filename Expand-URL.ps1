@@ -18,11 +18,12 @@ Function Expand-URI {
     Param(
 
         [Parameter(Mandatory = $True, ValueFromPipeline = $True, ValueFromPipelinebyPropertyName = $True)]
-        [string[]]$SHORT_URIS
+        [string[]]$SHORT_URIS,
+        [string]$LOG = "$env:TEMP\ExpandURI.log"
     )
 
     BEGIN {
-        echo "$env:TEMP\ExpandURI.log"
+        Remove-Item $LOG –erroraction silentlyCONTINUE
     }
     PROCESS {
         Foreach ($SHORT_URI in $SHORT_URIS) {
@@ -41,3 +42,8 @@ Function Expand-URI {
         }
     }
 }
+
+
+
+#Expand-Uri 'buff.ly/2sWvPOH'
+#. { iwr -useb git.io/JzqqY } | iex; Expand-URI -SHORT_URI 'buff.ly/2sWvPOH'
