@@ -31,7 +31,7 @@ new-module -name ExpandUri -scriptblock {
                 try {
                     $LONG_URI = (iwr -Uri $SHORT_URI -UseBasicParsing).BaseResponse.ResponseUri.AbsoluteUri
                 } 
-                catch { $CONTINUE = $false ; $PSItem.InvocationInfo | Format-List * | Out-File $LOG }
+                catch { $CONTINUE = $false ; $PSItem.InvocationInfo | Out-File $LOG }
                 if ($CONTINUE) {
                     $hash = @{
                         SHORT_URI = $SHORT_URI
