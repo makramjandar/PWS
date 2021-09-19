@@ -1,4 +1,4 @@
-new-module -name Expand-Uri -scriptblock {
+new-module -name ExpandUri -scriptblock {
     <#
         .SYNOPSIS
         Retrieves shortened URI.
