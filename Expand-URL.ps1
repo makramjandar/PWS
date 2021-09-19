@@ -38,7 +38,7 @@ new-module -name ExpandUri -scriptblock {
                         LONG_URI  = $LONG_URI
                     }
                     $OBJ = New-Object PSObject -Property $hash 
-                    Write-Output $OBJ
+                    Write-Output $OBJ | Format-List
                 }
             }
         }
