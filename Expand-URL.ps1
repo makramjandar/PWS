@@ -22,7 +22,10 @@ new-module -name ExpandUri -scriptblock {
             [string]$LOG = "$env:TEMP\ExpandURI.log"
         )
 
-        BEGIN { Remove-Item $LOG –erroraction silentlyCONTINUE }
+        BEGIN { 
+            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+            Remove-Item $LOG –erroraction silentlyCONTINUE
+        }
         PROCESS {
             Foreach ($SHORT_URI in $SHORT_URIS) {
                 $CONTINUE = $true
