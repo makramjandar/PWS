@@ -1,4 +1,4 @@
-new-module -name ExpandUri -scriptblock {
+new-module -name Expand-URI -scriptblock {
     <#
         .SYNOPSIS
         Retrieves shortened URI.
@@ -19,7 +19,7 @@ new-module -name ExpandUri -scriptblock {
         Param(
             [Parameter(Mandatory = $True, ValueFromPipeline = $True, ValueFromPipelinebyPropertyName = $True)]
             [string[]]$SHORT_URIS,
-            [string]$LOG = "$env:TEMP\ExpandURI.log"
+            [string]$LOG = "$env:TEMP\Expand-URI.log"
         )
 
         BEGIN { 
@@ -31,7 +31,7 @@ new-module -name ExpandUri -scriptblock {
                 try {
                     $LONG_URI = (iwr -Uri $SHORT_URI -UseBasicParsing).BaseResponse.ResponseUri.AbsoluteUri
                 } 
-                catch { $CONTINUE = $false ; $PSItem.InvocationInfo | Out-File $LOG }
+                catch { $CONTINUE = $false ; $PSItem.InvocationInfo | Out-File $LOG; "See $LOG for errors"  }
                 if ($CONTINUE) {
                     $hash = @{
                         SHORT_URI = $SHORT_URI
