@@ -31,6 +31,7 @@ new-module -name Expand-URI -scriptblock {
                 try {
                     $LONG_URI = (iwr -Uri $SHORT_URI -UseBasicParsing).BaseResponse.ResponseUri.AbsoluteUri
                     Write-Error $LONG_URI -Message "Houston, we have a problem." -ErrorAction Stop
+                    return
                 } 
                 catch {$CONTINUE = $false ; $PSItem.InvocationInfo | Out-File $LOG; "See $LOG"}
                 if ($CONTINUE) {
