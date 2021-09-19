@@ -23,7 +23,7 @@ new-module -name Expand-URI -scriptblock {
         )
 
         BEGIN { 
-            Remove-Item $LOG –erroraction silentlycontinue
+            Remove-Item $LOG -ErrorAction SilentlyContinue
         }
         PROCESS {
             Foreach ($SHORT_URI in $SHORT_URIS) {
