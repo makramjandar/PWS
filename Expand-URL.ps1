@@ -28,7 +28,7 @@ new-module -name Expand-URI -scriptblock {
         PROCESS {
             Foreach ($SHORT_URI in $SHORT_URIS) {
                 $CONTINUE = $true
-                try {$LONG_URI = (iwr -Uri $SHORT_URI -UseBasicParsing).BaseResponse.ResponseUri.AbsoluteUri} 
+                try {$LONG_URI = (iwr -Uri $SHORT_URI -UseBasicParsing -ErrorAction Stop).BaseResponse.ResponseUri.AbsoluteUri} 
                 catch {$CONTINUE = $false ; $PSItem.InvocationInfo | Out-File $LOG; "See $LOG"}
                 if ($CONTINUE) {
                     $hash = @{
