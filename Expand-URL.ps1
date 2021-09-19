@@ -11,7 +11,7 @@ new-module -name ExpandUri -scriptblock {
         .EXAMPLE
         URI1, URI2 | Expand-Uri
         .EXAMPLE
-        . { iwr -useb git.io/JzqqY } | iex; Expand-URI URL1 URL2
+        . { iwr -useb git.io/JzqqY } | iex; Expand-URI URL1, URL2
     #>
 
     Function Expand-URI {
@@ -29,6 +29,7 @@ new-module -name ExpandUri -scriptblock {
             Foreach ($SHORT_URI in $SHORT_URIS) {
                 $CONTINUE = $true
                 try {
+                    Remove-Item $LOG –erroraction silentlycontinue
                     $LONG_URI = (iwr -Uri $SHORT_URI -UseBasicParsing).BaseResponse.ResponseUri.AbsoluteUri
                 } 
                 catch { $CONTINUE = $false ; $PSItem.InvocationInfo | Format-List * | Out-File $LOG }
