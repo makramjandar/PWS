@@ -47,3 +47,4 @@ new-module -name ExpandUri -scriptblock {
 #Export-ModuleMember -Function Expand-URI
 #Expand-Uri 'buff.ly/2sWvPOH'
 #. { iwr -useb git.io/JzqqY } | iex; Expand-URI -SHORT_URI 'buff.ly/2sWvPOH'
+#
