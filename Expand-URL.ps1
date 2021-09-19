@@ -33,10 +33,11 @@ new-module -name ExpandUri -scriptblock {
                 } 
                 catch { $CONTINUE = $false ; $PSItem.InvocationInfo | Format-List * | Out-File $LOG }
                 if ($CONTINUE) {
-                    $OBJ = New-Object –typename PSObject
-                    $OBJ `
-                    | Add-Member –membertype NoteProperty –name SHORT_URI –value $SHORT_URI –passthru `
-                    | Add-Member –membertype NoteProperty –name LONG_URI –value $LONG_URI
+                    $hash = @{
+                        SHORT_URI = $SHORT_URI
+                        LONG_URI  = $LONG_URI
+                    }
+                    $OBJ = New-Object PSObject -Property $hash 
                     Write-Output $OBJ
                 }
             }
