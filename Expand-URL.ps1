@@ -23,13 +23,12 @@ new-module -name ExpandUri -scriptblock {
         )
 
         BEGIN { 
-            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+            Remove-Item $LOG –erroraction silentlycontinue
         }
         PROCESS {
             Foreach ($SHORT_URI in $SHORT_URIS) {
                 $CONTINUE = $true
                 try {
-                    Remove-Item $LOG –erroraction silentlycontinue
                     $LONG_URI = (iwr -Uri $SHORT_URI -UseBasicParsing).BaseResponse.ResponseUri.AbsoluteUri
                 } 
                 catch { $CONTINUE = $false ; $PSItem.InvocationInfo | Format-List * | Out-File $LOG }
