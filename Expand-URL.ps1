@@ -24,7 +24,6 @@ new-module -name ExpandUri -scriptblock {
 
         BEGIN { 
             [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-            #Remove-Item $LOG –erroraction silentlycontinue
         }
         PROCESS {
             Foreach ($SHORT_URI in $SHORT_URIS) {
